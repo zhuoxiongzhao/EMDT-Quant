@@ -3,11 +3,13 @@
 
 Description
 ---------------------
-codes for Empirical Mode Decomposition Trading
+Codes for Empirical Mode Decomposition Trading
 
 Database
 --------------------
-I have save the experimental data in file 'IF00.mat'. You also can get this data from Wind API (http://www.wind.com.cn/download.aspx)
++ I have save the experimental data in file 'IF00.mat'
+
++ You also can get this data from Wind API -- http://www.wind.com.cn/download.aspx
 
 Library Dependence
 ---------------------
