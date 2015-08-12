@@ -1,3 +1,12 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This is the codes for Empirical Mode Decomposition Trading algorithm -- Matlab Version
+% Power by Zhuoxiong Zhao @ SCUT
+% Contact : zhuoxiong.zhao@gmail.com
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+% You can download the data from Wind
 % clear,clc,close;
 % w= windmatlab;
 % % test the connection
@@ -7,89 +16,9 @@
 % endtime=today;
 % wdata= w.wsd('300072.SZ','close',begintime,endtime,'Priceadj','CP','tradingcalendar','NIB');
 % save('SJHB_data.mat', 'wdata');
-% 
-% %% emd process
-% load('SJHB_data.mat');
-% [IMF,ORT,NB_ITERATIONS] = emd(wdata);
-% 
-% 
-% IMF_new = cell(10,1);
-% IMF_data = zeros(100,1);
-% for i = 1:20:1300
-%     IMF_new{(i+19)/20} = emd(wdata(i:(i+19)));
-%     IMF_data(i:(i+19)) = IMF_new{(i+19)/20}(size(IMF_new{(i+19)/20},1), :);
-% end
-% 
-% subplot(3,1,1);
-% plot(wdata(1:1300));
-% subplot(3,1,2);
-% plot(IMF(size(IMF, 1),1:1300));
-% subplot(3,1,3);
-% plot(IMF_data);
-% 
-% %% for CFE data
-% w = windmatlab;
-% codes = 'IF00.CFE';
-% fields = 'open,high,low,close';
-% begintime = '2011-01-01';
-% endtime = now;
-% [ wdata_cfe, ~, ~, times, ~, ~ ] = w.wsi(codes,fields,begintime,endtime,'BarSize','1');
-% save('CFE_data.mat', 'wdata_cfe','times');
-% 
-% 
-% load('CFE_data.mat');
-% 
-% wdata_cfe_IMF = emd(wdata_cfe(:,4)','MAXMODES',4);
-% 
-% IMF_new = cell(315,1);
-% IMF_data = zeros(6300,1);
-% for i = 1:20:6300
-%     IMF_new{(i+19)/20} = emd(wdata_cfe(i:(i+19)));
-%     IMF_data(i:(i+19)) = IMF_new{(i+19)/20}(size(IMF_new{(i+19)/20},1), :);
-% end
-% 
-% subplot(3,1,1);
-% plot(1:6300,wdata_cfe(1:6300,4));
-% set(gca, 'XTick', 1:6300);
-% set(gca, 'XTickLabel', datestr(times));
-% subplot(3,1,2);
-% plot(wdata_cfe_IMF(size(wdata_cfe_IMF, 1),1:6300));
-% set(gca, 'XTickLabel', datestr(times));
-% subplot(3,1,3);
-% plot(IMF_data);
-% set(gca, 'XTickLabel', datestr(times));
-% 
-% 
-% %% for process
-% start_27_select_vec = times<datenum('28-Jul-2015');
-% start_27_ori = wdata_cfe(1:(find(start_27_select_vec==0,1)-1),4)';
-% start_27_IMF = wdata_cfe_IMF( 5, 1:(find(start_27_select_vec==0,1)-1));
-% now_28_ori = wdata_cfe((find(start_27_select_vec==0,1):size(start_27_select_vec, 1)),4)';
-% now41_28_ori = wdata_cfe((find(start_27_select_vec==0,1):(find(start_27_select_vec==0,1)+14)),4)';
-% now41_28_IMF = emd(now41_28_ori,'MAXMODES',4);
-% % cal the R
-% R_mean = log(std(start_27_ori-start_27_IMF)/std(start_27_IMF));
-% R_now = log(std(now41_28_ori-now41_28_IMF(size(now41_28_IMF, 1), :))/std(now41_28_IMF(size(now41_28_IMF, 1), :)));
-% % open a position
-% position = 0;
-% if R_now < R_mean
-%     signal = 1;
-% end
-% 
-% % more or empty
-% signal = 1;
-% if now41_28_ori(15)<now41_28_ori(1)
-%     signal = -1;
-% end
-% % judge when to close the position
-% remain_28_ori = wdata_cfe(((find(start_27_select_vec==0,1)+15):(find(start_27_select_vec==0,1)+89)),4)';
-% close_poition = 75;
-% for i = 1:75
-%     if (now41_28_ori(15)-remain_28_ori(i))/now41_28_ori(15)>0.006;
-%         close_poition = i;
-%     end
-% end
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% for IFOO.mat data
 clear all, close all, clc;
 load('IF00.mat');
@@ -114,7 +43,7 @@ end
 last_index = find(IF00_date_num==devide_date,1,'last');
 devide_index = find(single_date==devide_date);
 
-% % to cal the R_mean
+% to cal the R_mean
 R_mean = mean(R_all(1:devide_index));
 
 %% test samples
@@ -200,6 +129,8 @@ for i = (devide_index+1):size(single_date, 1)
         short_count = short_count+1;
     end
 end
+
+%% plot the data
 subplot(3,1,1)
 plot(trade(:,3));
 title('Total Assets');
