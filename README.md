@@ -15,9 +15,9 @@ Empirical Mode Decomposition -- http://perso.ens-lyon.fr/patrick.flandrin/emd.ht
 
 Reference
 ---------------------
-+Empirical Mode Decomposition Trading -- https://github.com/zhuoxiongzhao/EMDT-Quant/blob/master/Empirical%20Mode%20Decomposition%20Trading.pdf<br/>
++ Empirical Mode Decomposition Trading -- https://github.com/zhuoxiongzhao/EMDT-Quant/blob/master/Empirical%20Mode%20Decomposition%20Trading.pdf<br/>
 
-+Introduction to EMD -- https://en.wikipedia.org/wiki/Hilbert%E2%80%93Huang_transform
++ Introduction to EMD -- https://en.wikipedia.org/wiki/Hilbert%E2%80%93Huang_transform
 
 Power by Zhuoxiong Zhao
 -------------------------
